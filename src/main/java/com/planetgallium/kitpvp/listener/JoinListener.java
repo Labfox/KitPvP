@@ -42,14 +42,17 @@ public class JoinListener implements Listener {
 					" &7has joined the server."));
 		}
 
-		if (Toolkit.inArena(p)) {
-			if (config.getBoolean("Arena.ClearInventoryOnJoin")) {
-				p.getInventory().clear();
-				p.getInventory().setArmorContents(null);
-			}
+		// Arena.DisableAutoJoin
+		if(!config.getBoolean("Arena.DisableAutoJoin")) {
+			if (Toolkit.inArena(p)) {
+				if (config.getBoolean("Arena.ClearInventoryOnJoin")) {
+					p.getInventory().clear();
+					p.getInventory().setArmorContents(null);
+				}
 
-			arena.addPlayer(p, config.getBoolean("Arena.ToSpawnOnJoin"),
-					config.getBoolean("Arena.GiveItemsOnJoin"));
+				arena.addPlayer(p, config.getBoolean("Arena.ToSpawnOnJoin"),
+						config.getBoolean("Arena.GiveItemsOnJoin"));
+			}
 		}
 	}
 	
